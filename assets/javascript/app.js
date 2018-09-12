@@ -28,7 +28,7 @@ $(document).ready(function(){
       correct: "Emu War",
       correct: " the Emu War."
     },
-    {question: "On average,human dreams last how long?",
+    {question: "On average, human dreams last how long?",
       answers:[{text:"Less than 1 second",
         value: false},
         {text:"15 seconds",
@@ -40,13 +40,13 @@ $(document).ready(function(){
       correct: " 2 to 3 seconds."
     },
     {question: "In 1921 Evan O'Neill Kane performed surgery on himself to remove this.",
-      answers:[{text:"A Tumor",
+      answers:[{text:"A tumor",
         value: false},
         {text:"Part of his right kidney",
         value: false},
         {text:"A bullet",
          value: false},
-        {text:"His Appendix",
+        {text:"His appendix",
         value: true}],
         correct: " his appendix."
     },
@@ -185,7 +185,7 @@ $(document).ready(function(){
     $(".buttonSpace").empty();
     var newBtn;
     if (ending) {
-      var score = $("<div>").addClass("score-display").html("<p>Game Over.</p> <p> You answered " + triviaGame.right + " question(s) correctly.</p>" + "<p>" + triviaGame.wrong + " question(s) incorrectly.</p>" + "<p>And failed to answer " + triviaGame.unanswered + " question(s).");
+      var score = $("<div>").addClass("score-display").html("<p>Game Over.</p> <p class=\"correctAns\"> You answered " + triviaGame.right + " question(s) correctly.</p>" + "<p class=\"incorrectAns\">" + triviaGame.wrong + " question(s) incorrectly.</p>" + "<p class=\"noAns\">And failed to answer " + triviaGame.unanswered + " question(s).");
       newBtn = $("<button>Restart</button>").addClass("rstrt btn btn-danger");
       $(".gameSpace").append(score);
       $(".buttonSpace").append(newBtn);

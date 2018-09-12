@@ -5,6 +5,7 @@ body {
 h1 {
   text-align: center;
 }
+
 .instructions {
   margin: 1em;
 }
@@ -20,4 +21,13 @@ h1 {
 
 button {
   margin: 1em;
+}
+p.correctAns {
+  color: #28a745;
+}
+p.incorrectAns {
+  color: #dc3545;
+}
+p.noAns{
+  color: #007bff;
 }
