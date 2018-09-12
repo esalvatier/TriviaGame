@@ -1,3 +1,23 @@
+body {
+  background-image: url("../images/seamless_paper_texture/seamless_paper_texture.png");
+}
+
 h1 {
   text-align: center;
+}
+.instructions {
+  margin: 1em;
+}
+
+.gameSpace {
+  height: 175px;
+  background: white;
+}
+
+#display {
+  margin: 1em;
+}
+
+button {
+  margin: 1em;
 }

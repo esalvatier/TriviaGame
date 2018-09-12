@@ -5,35 +5,72 @@ $(document).ready(function(){
     wrong: 0,
     unanswered: 0,
     questions: [{
-      question: "Q1",
-      answers:[{text:"incorrect",
+      question: "Which animal has, according to research, an estimate 95% success rate when hunting?",
+      answers:[{text:"Wolves",
         value: false},
-        {text:"incorrect",
+        {text:"Blue Whale",
         value: false},
-        {text:"correct",
+        {text:"Dragonfly",
          value: true},
-        {text:"incorrect",
-        value: false}]
+        {text:"Eagle",
+        value: false}],
+      correct: " the dragonfly"
     },
-    {question: "Q2",
-      answers:[{text:"correct",
+    {question: "In 1932 Australia fought in this war and lost.",
+      answers:[{text:"Emu War",
         value: true},
-        {text:"incorrect",
+        {text:"Chaco War",
         value: false},
-        {text:"incorrect",
+        {text:"Second Sino-Japanese War",
          value: false},
-        {text:"incorrect",
-        value: false}]
+        {text:"West Australian War",
+        value: false}],
+      correct: "Emu War",
+      correct: " the Emu War."
     },
-    {question: "Q3",
-      answers:[{text:"incorrect",
+    {question: "On average,human dreams last how long?",
+      answers:[{text:"Less than 1 second",
         value: false},
-        {text:"incorrect",
+        {text:"15 seconds",
         value: false},
-        {text:"incorrect",
+        {text:"4 minutes",
          value: false},
-        {text:"correct",
-        value: true}]
+        {text:"2 to 3 seconds",
+        value: true}],
+      correct: " 2 to 3 seconds."
+    },
+    {question: "In 1921 Evan O'Neill Kane performed surgery on himself to remove this.",
+      answers:[{text:"A Tumor",
+        value: false},
+        {text:"Part of his right kidney",
+        value: false},
+        {text:"A bullet",
+         value: false},
+        {text:"His Appendix",
+        value: true}],
+        correct: " his appendix."
+    },
+    {question: "Technically speaking the pluralof Octopus, is this.",
+      answers:[{text:"Octopi",
+        value: false},
+        {text:"Octopusses",
+        value: false},
+        {text:"Octopus",
+         value: false},
+        {text:"Octopodes",
+        value: true}],
+        correct: " Octopodes."
+    },
+    {question: "In Curling a clockwise spin will cause the stone to move towards which direction?",
+      answers:[{text:"Left",
+        value: false},
+        {text:"Neither",
+        value: false},
+        {text:"Up",
+         value: false},
+        {text:"Right",
+        value: true}],
+        correct: " to the right."
     }],
 
     startGame: function() {
@@ -49,7 +86,7 @@ $(document).ready(function(){
       var questDispl = $("<div>").addClass("question-display col-md-12 text-center").text(this.questions[position].question);
       var ans = $("<div>").addClass("answer-options col-md-12 text-center")
       this.questions[position].answers.forEach(function(curr){
-        var currentAns =  $("<button>").addClass("btnOptns").attr("value", curr.value).text(curr.text);
+        var currentAns =  $("<button>").addClass("btnOptns btn btn-primary").attr("value", curr.value).text(curr.text);
         ans.append(currentAns);
       });
 
@@ -80,10 +117,12 @@ $(document).ready(function(){
   var currentPos = 0;
   var maxPos = triviaGame.questions.length;
   var ending = false;
+  var currentQuestion;
 
   triviaGame.startGame();
   
     $(".buttonSpace").on("click", ".strtBtn", function(){
+      $(".instructions").remove();
       strtTimer($(this));
       clock = setInterval(timer, 1000);
     });
@@ -98,21 +137,22 @@ $(document).ready(function(){
       pauseTimer = setInterval(pauseOnAnswer, 1000);
       var ansText;
       if ($(this).attr("value") == "true") {
-        ansText = "Congratulations! That is correct!";
+        ansText = "<p>Congratulations! That is correct!</p>";
         triviaGame.right++;
       } else {
         triviaGame.wrong++;
-        ansText = "Incorrect!";
+        ansText = "<p>Incorrect!</p> <p>The right answer is" + currentQuestion.correct +"</p>";
       }
       $(".answer-options").empty();
-      $(".question-display").text(ansText);
+      $(".question-display").html(ansText);
 
     });
 
     $(".buttonSpace").on("click", ".rstrt", function(){
       reset();
       $(".rstrt").remove();
-      triviaGame.shuffle(triviaGame.questions);
+      $(".score-display").remove();
+      triviaGame.startGame();
       clock = setInterval(timer, 1000);
       currentPos = 0;
       ending = false;
@@ -146,11 +186,11 @@ $(document).ready(function(){
     var newBtn;
     if (ending) {
       var score = $("<div>").addClass("score-display").html("<p>Game Over.</p> <p> You answered " + triviaGame.right + " question(s) correctly.</p>" + "<p>" + triviaGame.wrong + " question(s) incorrectly.</p>" + "<p>And failed to answer " + triviaGame.unanswered + " question(s).");
-      newBtn = $("<button>Restart</button>").addClass("rstrt");
+      newBtn = $("<button>Restart</button>").addClass("rstrt btn btn-danger");
       $(".gameSpace").append(score);
       $(".buttonSpace").append(newBtn);
     } else {
-      newBtn = $("<button>Next</button>").addClass("nxtQ");
+      newBtn = $("<button>Next</button>").addClass("nxtQ btn btn-success");
       $(".buttonSpace").append(newBtn);
     }
     pauseTime = 4;
@@ -158,11 +198,11 @@ $(document).ready(function(){
   }
 
   var strtTimer = function(oldBtn) {
+    currentQuestion = triviaGame.questions[currentPos];
     oldBtn.remove();
     var display = $("<div>").attr("id", "display").text("30");
     $(".gameSpace").append(display);
     triviaGame.pickQ(currentPos);
-    console.log(currentPos);
     currentPos++;
     if (currentPos === maxPos) {
       ending = true;
