@@ -8,11 +8,11 @@ $(document).ready(function(){
       question: "Which animal has, according to research, an estimate 95% success rate when hunting?",
       answers:[{text:"Wolves",
         value: false},
-        {text:"Blue Whale",
+        {text:"Blue Whales",
         value: false},
-        {text:"Dragonfly",
+        {text:"Dragonflies",
          value: true},
-        {text:"Eagle",
+        {text:"Eagles",
         value: false}],
       correct: " the dragonfly"
     },
@@ -50,7 +50,7 @@ $(document).ready(function(){
         value: true}],
         correct: " his appendix."
     },
-    {question: "Technically speaking the pluralof Octopus, is this.",
+    {question: "Technically speaking the plural of Octopus, is this.",
       answers:[{text:"Octopi",
         value: false},
         {text:"Octopusses",
